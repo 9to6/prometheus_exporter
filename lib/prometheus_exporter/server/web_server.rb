@@ -9,7 +9,7 @@ module PrometheusExporter::Server
   class WebServer
     attr_reader :collector
 
-    def initialize(port: , collector: nil, timeout: PrometheusExporter::DEFAULT_TIMEOUT, verbose: false)
+    def initialize(address: , port: , collector: nil, timeout: PrometheusExporter::DEFAULT_TIMEOUT, verbose: false)
 
       @verbose = verbose
 
@@ -37,6 +37,7 @@ module PrometheusExporter::Server
       end
 
       @server = WEBrick::HTTPServer.new(
+        BindAddress: address,
         Port: port,
         Logger: logger,
         AccessLog: access_log,

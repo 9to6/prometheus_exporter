@@ -12,6 +12,12 @@ def run
 
   OptionParser.new do |opt|
     opt.banner = "Usage: prometheus_exporter [options]"
+    opt.on('-b',
+           '--address ADDRESS',
+           String,
+           "Bind address exporter should listen on (default: #{PrometheusExporter::DEFAULT_ADDRESS})") do |o|
+      options[:address] = o.to_s
+    end
     opt.on('-p',
            '--port INTEGER',
            Integer,

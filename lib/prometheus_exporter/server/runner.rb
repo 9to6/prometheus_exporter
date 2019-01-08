@@ -20,7 +20,7 @@ module PrometheusExporter::Server
         raise WrongInheritance, 'Collector class must be inherited from PrometheusExporter::Server::CollectorBase'
       end
 
-      server = server_class.new port: port, collector: collector, timeout: timeout, verbose: verbose
+      server = server_class.new address: address, port: port, collector: collector, timeout: timeout, verbose: verbose
       server.start
     end
 
@@ -30,6 +30,14 @@ module PrometheusExporter::Server
 
     def prefix
       @prefix || PrometheusExporter::DEFAULT_PREFIX
+    end
+    
+    def address=(address)
+      @address = address
+    end
+
+    def address
+      @address|| PrometheusExporter::DEFAULT_ADDRESS
     end
 
     def port=(port)
